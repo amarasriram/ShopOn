@@ -1,0 +1,69 @@
+﻿@using ShopOn.Models
+@model IEnumerable<ElectronicItem>
+
+
+@* <marquee><a asp-controller="Category" asp-action="List1" style="text-decoration:none" id="demo" onmouseenter="mouseEnter()" onmouseleave="mouseLeave()">&#9888; &#x26A0; Delicios, Smooth, Hot, Spicy, Chocolate Pies Are Ready With 60% Discount!!</a></marquee>*@
+
+ <div class="container">
+@foreach (var electronicItem in Model)
+    {
+        
+          
+                <div class="gallery">
+                    <a asp-controller="ElectronicItem" asp-action="Details" asp-route-id="@electronicItem.ElectronicItemId"> <img src="@electronicItem.ImageUrl1" alt=""> </a>
+                    <div class="desc">
+                        <h3 class="pull-right">@electronicItem.Price.ToString("c")</h3>  
+                        <a asp-controller="Pie" asp-action="Details" asp-route-id="@electronicItem.ElectronicItemId" style="text-decoration:none">   <h2 style="color:black">@electronicItem.BrandName</h2> </a>
+                      
+                          
+                      &nbsp; 
+                
+                        <a class="btn btn-warning" asp-controller="ShoppingCart" asp-action="BuyNow" asp-route-ElectronicItemId="@electronicItem.ElectronicItemId"> BUY NOW </a>   &nbsp;&nbsp; &nbsp;
+
+                        <a class="btn btn-warning" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-ElectronicItemId="@electronicItem.ElectronicItemId"> ADD TO CART </a>
+                        &nbsp; <a asp-controller="ElectronicItem" asp-action="AddToWishList" asp-route-id="@electronicItem.ElectronicItemId" class="temp" >&#10084;</a>
+                        &nbsp;&nbsp; 
+
+                    </div>
+                </div>
+            
+        
+    }
+</div>
+  
+<style>
+    .container{
+        max-width:1400px;
+        margin:25px;
+        background: white;
+        overflow:auto;
+    }
+    .gallery{
+        margin:2px;
+        border:5px solid #D3D3D3 ;
+       float:left;
+        width:390px;
+    }
+    .gallery img{
+        width:100%;
+        height:250px;
+    }
+    .desc{
+        padding:5px;
+        text-align:center;
+    }
+
+    .temp:link, .temp:visited {
+  background-color: white;
+  color: Red;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.temp:hover, .temp:active {
+  background-color:yellow;
+}
+
+</style>

@@ -1,0 +1,52 @@
+﻿@using ShopOn.Models
+@model IEnumerable<Category>
+
+  
+
+
+@* <marquee><a asp-controller="Category" asp-action="List1" style="text-decoration:none" id="demo" onmouseenter="mouseEnter()" onmouseleave="mouseLeave()">&#9888; &#x26A0; Delicios, Smooth, Hot, Spicy, Chocolate Pies Are Ready With 60% Discount!!</a></marquee>*@
+
+ <div class="container">
+@foreach (var Item in Model)
+    {
+        
+          
+                <div class="gallery">
+                    <a asp-controller="ElectronicItem" asp-action="GetAllItems" asp-route-CategoryId="@Item.CategoryId"> <img src="@Item.Image" alt="ImageLogo"> </a>
+                    <div class="desc">
+                       
+                         <h2 style="color:white; background-color:black">@Item.CategoryName</h2>
+                      
+
+                    </div>
+                </div>
+            
+        
+    }
+</div>
+  
+<style>
+    .container{
+        max-width:1400px;
+        margin:25px;
+        background: white;
+        overflow:auto;
+    }
+    .gallery{
+        margin:5px;
+        border:none ;
+       float:left;
+        width:390px;
+    }
+    .gallery img{
+        width:100%;
+        height:250px;
+    }
+    .desc{
+        padding:10px;
+        text-align:center;
+    }
+
+   
+
+</style>

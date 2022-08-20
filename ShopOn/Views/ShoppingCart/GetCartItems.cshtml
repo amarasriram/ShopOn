@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ShopOn.Models.CartItems>
+
+@{
+    ViewData["Title"] = "CART DETAILS";
+}
+
+<h4 style="text-align:center">SHOPPING CART</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+        
+            <th>
+                
+                <h5>ITEM NAME</h5>
+            </th>
+        
+            <th>
+               
+                <h5>QUANTITY</h5>
+            </th>
+            <th>
+               
+                <h5>PRICE</h5>
+            </th>
+            <th>
+                <h5>TOTAL</h5>
+            </th>
+                                
+            <th>
+               <h5> DELETE </h5>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+       
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                <a asp-controller="ShoppingCart" asp-action="DecreamentCartItem" asp-route-ElectronicItemId="@item.ItemIdNumber" style="text-decoration:none">-</a>  @Html.DisplayFor(modelItem => item.Quantity)  <a asp-controller="ShoppingCart" asp-action="AddToCart11" asp-route-ElectronicItemId="@item.ItemIdNumber" style="text-decoration:none">+</a> 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemPrice)                  
+           </td>
+
+            <td>
+                    @{
+                        var total = (@item.Quantity * @item.ItemPrice);
+                    }
+                    <h5>@total</h5>
+            </td>
+
+            <td>
+                <a class="btn btn-outline-danger" asp-controller="ShoppingCart" asp-action="RemoveCartItem" asp-route-CartId="@item.CartItemsId"> &#128465; </a> 
+                
+            </td>
+        </tr>
+       
+}
+                   
+    </tbody>
+</table>
+
+ <h5 style="text-align:right">ORDER TOTAL: $@ViewBag.OrderTotal </h5>
+  @{ if(@Model.Count()>0){
+    <p align="right">
+        <a class="btn btn-success" asp-controller="ElectronicItem" asp-action="ShippingAddress"> PROCEED TO BUY </a> </p>
+    }}
+
+

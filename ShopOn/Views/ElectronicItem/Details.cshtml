@@ -1,0 +1,61 @@
+﻿@model ShopOn.Models.ElectronicItem
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+
+
+<div class="thumbnail">
+    <div align="center"><img alt="Image of pie" src="@Model.ImageUrl1" style="width:30%"></div>
+     <div align="center"><img alt="Image of pie" src="@Model.ImageUrl2" style="width:30%"></div>
+      <div align="center"><img alt="Image of pie" src="@Model.ImageUrl3" style="width:30%"></div>
+    <div class="caption-full">
+        <h3 class="pull-right" align="center">&#36; @Model.Price</h3>
+        <h3 align="center">
+            <a href="#" style="text-decoration:none">@Model.Name</a>
+        </h3>
+        <h3 align="center">
+            <a href="#" style="text-decoration:none">@Model.BrandName</a>
+        </h3>
+        <h4>@Model.ShortDescription</h4>
+        <p align="justify"><h5 style="color:darkred">@Model.LongDescription</h5></p>
+       
+        
+ 
+        <div class="addToCart">
+         
+                 @{ 
+                     if(@Model.InStock){
+                            <p class="button">
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="BuyNow"
+                   asp-route-ElectronicItemId="@Model.ElectronicItemId">BUY NOW</a>
+                </p>
+
+                 <p class="button">
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart"
+                   asp-route-ElectronicItemId="@Model.ElectronicItemId">ADD TO CART</a></p>
+                }
+                else
+                {
+                    <h4 style="color:red">OUT OF STOCK</h4>
+                }
+            }
+
+                        <p class="button">
+                     
+
+                    <a class="btn btn-danger" asp-controller="ElectronicItem" asp-action="DeleteElectronicItem" asp-route-id="@Model.ElectronicItemId">DELETE</a>
+              
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a  class="btn btn-info" asp-action="Edit" asp-route-id="@Model?.ElectronicItemId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>

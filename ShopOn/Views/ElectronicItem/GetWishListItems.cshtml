@@ -1,0 +1,91 @@
+﻿
+@model IEnumerable<ElectronicItem>
+
+   <h4 style="text-align:center">WISHLIST </h4>
+
+@{
+    if(Model.Count()==0)
+    {
+    <h4 style="align-content:center"> :( Oops No Items in WishList !! </h4>
+    }
+}
+ <div class="container">
+@foreach (var electronicItem in Model)
+{
+    
+        <div class="gallery">
+          <a asp-controller="ElectronicItem" asp-action="Details" asp-route-id="@electronicItem.ElectronicItemId"> <img src="@electronicItem.ImageUrl1" alt="ImageLogos"> </a>
+            <div class="desc">
+                <h3 class="pull-right">@electronicItem.Price.ToString("c")</h3>   
+             <a asp-controller="ElectronicItem" asp-action="Details" asp-route-id="@electronicItem.ElectronicItemId" style="text-decoration:none">   <h2>@electronicItem.BrandName</h2> </a>
+               
+                 @{ if(@electronicItem.InStock){
+                <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="BuyNow" asp-route-ElectronicItemId="@electronicItem.ElectronicItemId"> BUY NOW </a>
+               
+                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-ElectronicItemId="@electronicItem.ElectronicItemId"> ADD TO CART </a>
+                    }
+                    else
+                    {
+                        <h5 style="color:red">OUT OF STOCK</h5>
+                    }
+                }
+
+@*
+             <div class="addToCart">
+                <p class="button">
+                    <a class="btn btn-primary" 
+                       asp-controller="ShoppingCarttt" 
+                       asp-action="AddToShoppingCart"
+                       asp-route-pieId="@pie.PieId">Add to cart</a>
+                </p>
+            </div>*@
+
+
+             
+               
+            </div>
+             <a class="btn btn-outline-danger" asp-controller="ElectronicItem" asp-action="DeleteWishListItem" asp-route-ElectronicItemId="@electronicItem.ElectronicItemId" class="temp" >Remove</a>
+        </div>
+        
+               
+    
+   
+}
+</div>
+  
+<style>
+    .container{
+        max-width:1400px;
+        margin:25px;
+        background: white;
+        overflow:auto;
+    }
+    .gallery{
+        margin:2px;
+        border:5px solid #D3D3D3 ;
+       float:left;
+        width:390px;
+    }
+    .gallery img{
+        width:100%;
+        height:250px;
+    }
+    .desc{
+        padding:5px;
+        text-align:center;
+    }
+
+    .temp:link, .temp:visited {
+  background-color: white;
+  color: Red;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.temp:hover, .temp:active {
+  background-color:yellow;
+}
+
+</style>
